@@ -1,0 +1,297 @@
+version: 2
+
+models:
+  - name: stg_datetime
+    description: Timestamps staging data of football matches
+    columns:
+      - name: datetime_id
+        description: Unique identifier for the timestamp
+        tests:
+          - unique
+          - not_null
+      - name: utc_timestamp
+        description: UTC timestamp
+      - name: utc_date
+        description: Date of the UTC timestamp
+      - name: utc_time
+        description: Time of the UTC timestamp
+      - name: year
+        description: Year of the UTC timestamp
+      - name: quarter
+        description: Quarter of the UTC timestamp
+      - name: month
+        description: Month of the UTC timestamp
+      - name: day
+        description: Day of the UTC timestamp
+      - name: week
+        description: Week of the UTC timestamp
+      - name: weekday
+        description: Day of the week of the UTC timestamp
+      - name: weekday_name
+        description: Name of the day of the week of the UTC timestamp
+      - name: hours
+        description: Hours of the UTC timestamp
+      - name: minutes
+        description: Minutes of the UTC timestamp
+      - name: seconds
+        description: Seconds of the UTC timestamp
+
+  - name: stg_competition
+    description: Football competitions staging data
+    columns:
+      - name: competition_id
+        description: Unique identifier for the competition
+        tests:
+          - unique
+          - not_null
+      - name: area_id
+        description: Identifier for the competition location
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_area')
+              field: area_id
+      - name: name
+        description: Name of the competition
+        tests:
+          - not_null
+      - name: type
+        description: Type of the competition
+      - name: emblem
+        description: Emblem of the competition
+      - name: scd_id
+        description: SCD 2 unique identifier for the competition
+
+  - name: stg_team
+    description: Football teams staging data
+    columns:
+      - name: team_id
+        description: Unique identifier for the team
+        tests:
+          - unique
+          - not_null
+      - name: area_id
+        description: Identifier for the team location
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_area')
+              field: area_id
+      - name: name
+        description: Name of the team
+        tests:
+          - not_null
+      - name: emblem
+        description: Emblem of the team
+      - name: colors
+        description: Colors of the team
+      - name: foundation_year
+        description: Foundation year of the team
+      - name: website
+        description: Website of the team
+      - name: address
+        description: Home address of the team
+      - name: stadion
+        description: Home stadion of the team
+      - name: scd_id
+        description: SCD 2 unique identifier for the team
+
+  - name: stg_season
+    description: Football seasons staging data
+    columns:
+      - name: season_id
+        description: Unique identifier for the season
+        tests:
+          - unique
+          - not_null
+      - name: competition_id
+        description: Identifier for the season competition
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_competition')
+              field: scd_id
+      - name: winner_id
+        description: Identifier for the season winner team
+        tests:
+          - relationships:
+              to: ref('dim_team')
+              field: scd_id
+      - name: start_date
+        description: Start date of the season
+      - name: end_date
+        description: End date of the season
+      - name: current_matchday
+        description: Current matchday of the season
+      - name: matches_played
+        description: Number of played matches of the season
+      - name: matches_remaining
+        description: Number of remaining matches of the season
+      - name: matches_total
+        description: Total number of matches of the season
+        tests:
+          - not_null
+      - name: status
+        description: State of the season
+
+  - name: stg_matches
+    description: Football matches staging data
+    columns:
+      - name: match_id
+        description: Unique identifier for the match
+        tests:
+          - not_null
+          - unique
+      - name: competition_id
+        description: Identifier for the match competition
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_competition')
+              field: scd_id
+      - name: season_id
+        description: Identifier for the match season
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_season')
+              field: season_id
+      - name: datetime_id
+        description: Identifier for the match timestamp
+        tests:
+          - relationships:
+              to: ref('dim_datetime')
+              field: datetime_id
+      - name: home_team_id
+        description: Identifier for the match home team
+        tests:
+          - relationships:
+              to: ref('dim_team')
+              field: scd_id
+      - name: away_team_id
+        description: Identifier for the match guest team
+        tests:
+          - relationships:
+              to: ref('dim_team')
+              field: scd_id
+      - name: area_id
+        description: Identifier for the match location
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_area')
+              field: area_id
+      - name: half_time_home_goals
+        description: Number of home team goals of the first half of the match
+      - name: half_time_away_goals
+        description: Number of guest team goals of the first half of the match
+      - name: full_time_home_goals
+        description: Number of home team goals at the end of the match
+      - name: full_time_away_goals
+        description: Number of guest team goals at the end of the match
+      - name: winner
+        description: Winner of the match
+      - name: duration
+        description: Duration of the match
+      - name: status
+        description: State of the match
+      - name: season_matchday
+        description: Matchday of the match
+      - name: competition_stage
+        description: Stage of the competition of the match
+      - name: competition_group
+        description: Group of the competition of the match
+
+  - name: dim_datetime
+    description: Timestamps data of football matches
+    columns:
+      - name: datetime_id
+        description: Unique identifier for the timestamp
+      - name: utc_timestamp
+        description: UTC timestamp
+      - name: utc_date
+        description: Date of the UTC timestamp
+      - name: utc_time
+        description: Time of the UTC timestamp
+      - name: year
+        description: Year of the UTC timestamp
+      - name: quarter
+        description: Quarter of the UTC timestamp
+      - name: month
+        description: Month of the UTC timestamp
+      - name: day
+        description: Day of the UTC timestamp
+      - name: week
+        description: Week of the UTC timestamp
+      - name: weekday
+        description: Day of the week of the UTC timestamp
+      - name: weekday_name
+        description: Name of the day of the week of the UTC timestamp
+      - name: hours
+        description: Hours of the UTC timestamp
+      - name: minutes
+        description: Minutes of the UTC timestamp
+      - name: seconds
+        description: Seconds of the UTC timestamp
+
+  - name: dim_season
+    description: Football seasons data
+    columns:
+      - name: season_id
+        description: Unique identifier for the season
+      - name: competition_id
+        description: Identifier for the season competition
+      - name: winner_id
+        description: Identifier for the season winner team
+      - name: start_date
+        description: Start date of the season
+      - name: end_date
+        description: End date of the season
+      - name: current_matchday
+        description: Current matchday of the season
+      - name: matches_played
+        description: Number of played matches of the season
+      - name: matches_remaining
+        description: Number of remaining matches of the season
+      - name: matches_total
+        description: Total number of matches of the season
+      - name: status
+        description: State of the season
+
+  - name: fact_matches
+    description: Football matches data
+    columns:
+      - name: match_id
+        description: Unique identifier for the match
+      - name: competition_id
+        description: Identifier for the match competition
+      - name: season_id
+        description: Identifier for the match season
+      - name: datetime_id
+        description: Identifier for the match timestamp
+      - name: home_team_id
+        description: Identifier for the match home team
+      - name: away_team_id
+        description: Identifier for the match guest team
+      - name: area_id
+        description: Identifier for the match location
+      - name: half_time_home_goals
+        description: Number of home team goals of the first half of the match
+      - name: half_time_away_goals
+        description: Number of guest team goals of the first half of the match
+      - name: full_time_home_goals
+        description: Number of home team goals at the end of the match
+      - name: full_time_away_goals
+        description: Number of guest team goals at the end of the match
+      - name: winner
+        description: Winner of the match
+      - name: duration
+        description: Duration of the match
+      - name: status
+        description: State of the match
+      - name: season_matchday
+        description: Matchday of the match
+      - name: competition_stage
+        description: Stage of the competition of the match
+      - name: competition_group
+        description: Group of the competition of the match

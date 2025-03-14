@@ -1,0 +1,27 @@
+snapshots:
+  - name: dim_competition
+    description: Football competitions data
+    relation: ref('stg_competition')
+    config:
+      database: test-projects-452313
+      unique_key: competition_id
+      strategy: check
+      check_cols: ["name", "emblem", "area_id"]
+      snapshot_meta_column_names:
+        dbt_valid_from: start_date
+        dbt_valid_to: end_date
+        dbt_scd_id: scd_id
+        dbt_updated_at: modified_date
+    columns:
+      - name: competition_id
+        description: Unique identifier for the competition
+      - name: area_id
+        description: Identifier for the competition location
+      - name: name
+        description: Name of the competition
+      - name: type
+        description: Type of the competition
+      - name: emblem
+        description: Emblem of the competition
+      - name: scd_id
+        description: SCD 2 unique identifier for the competition

@@ -1,0 +1,35 @@
+snapshots:
+  - name: dim_team
+    description: Football teams data
+    relation: ref('stg_team')
+    config:
+      database: test-projects-452313
+      unique_key: team_id
+      strategy: check
+      check_cols: ["name", "emblem", "colors", "website", "address", "stadion", "area_id"]
+      snapshot_meta_column_names:
+        dbt_valid_from: start_date
+        dbt_valid_to: end_date
+        dbt_scd_id: scd_id
+        dbt_updated_at: modified_date
+    columns:
+      - name: team_id
+        description: Unique identifier for the team
+      - name: area_id
+        description: Identifier for the team location
+      - name: name
+        description: Name of the team
+      - name: emblem
+        description: Emblem of the team
+      - name: colors
+        description: Colors of the team
+      - name: foundation_year
+        description: Foundation year of the team
+      - name: website
+        description: Website of the team
+      - name: address
+        description: Home address of the team
+      - name: stadion
+        description: Home stadion of the team
+      - name: scd_id
+        description: SCD 2 unique identifier for the team

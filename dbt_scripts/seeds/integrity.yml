@@ -1,0 +1,20 @@
+version: 2
+
+seeds:
+  - name: dim_area
+    description: Football matches areas data
+    columns:
+      - name: area_id
+        description: Unique identifier for the area
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: Name of the area
+        tests:
+          - unique
+          - not_null
+      - name: flag
+        description: Flag of the area
+      - name: location
+        description: Geographical location of the area

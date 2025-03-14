@@ -1,0 +1,22 @@
+api_url: "http://api.football-data.org/v4"
+
+api_resources:
+  competitions: "competitions"
+
+api_seed_resources:
+  areas: "areas"
+
+api_leagues:
+  german_bundes_league: "BL1"
+  champions_league: "CL"
+  dutch_eredivisie: "DED"
+  english_championship: "ELC"
+  french_league_one: "FL1"
+  spanish_la_liga: "PD"
+  english_premier_league: "PL"
+  portuguese_primeira_league: "PPL"
+  italian_serie_a: "SA"
+
+api_endpoints:
+  matches: "matches"
+  teams: "teams"

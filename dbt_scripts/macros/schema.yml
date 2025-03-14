@@ -1,0 +1,44 @@
+version: 2
+
+macros:
+  - name: clean_nulls
+    description: Cleans null values and null strings from the column
+    arguments:
+      - name: column
+        type: string
+        description: Name of the column to handle the null values and null string
+
+  - name: stage_datetime_table
+    description: Stage the datetime source table
+    arguments:
+      - name: source_name
+        type: string
+        description: Name of the source table
+
+  - name: stage_season_table
+    description: Stage the season source table
+    arguments:
+      - name: source_name
+        type: string
+        description: Name of the source table
+
+  - name: stage_competition_table
+    description: Stage the competition source table
+    arguments:
+      - name: source_name
+        type: string
+        description: Name of the source table
+
+  - name: stage_team_table
+    description: Stage the team source table
+    arguments:
+      - name: source_name
+        type: string
+        description: Name of the source table
+
+  - name: stage_matches_table
+    description: Stage the matches source table
+    arguments:
+      - name: source_name
+        type: string
+        description: Name of the source table

@@ -1,0 +1,16 @@
+.env
+
+application_default_credentials.json
+
+/dbt_scripts/target/
+/dbt_scripts/dbt_packages/
+/dbt_scripts/logs/
+/dbt_scripts/.user.yml
+/dbt_scripts/profiles.yml
+/dbt_scripts/models/schema.yml
+/dbt_scripts/seeds/dim_area.csv
+/dbt_scripts/macros/metadata.sql
+
+airflow/logs/
+
+__pycache__/
