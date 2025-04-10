@@ -1,7 +1,7 @@
 # Football Data ELT Pipeline
 
 ## Overview
-This project is an ELT (Extract, Load, Transform) pipeline designed to ingest, store, and process football match data from various European leagues, including the UEFA Champions League. It leverages Python, Apache Airflow, Google Cloud Platform (GCP), DBT, and Docker to automate data ingestion and transformation.
+This project is an end-to-end ELT (Extract, Load, Transform) data pipeline built to ingest, store, and process football match data from various European leagues, including the UEFA Champions League. The pipeline is developed using Python, Apache Airflow, Google Cloud Platform (GCP), Data Build Tool (DBT), and Docker to enable scalable and automated data workflows.
 
 The pipeline extracts match data from an external football API, stages raw JSON files in a GCS bucket, creates CSV files for the rarely updated data, and loads them into BigQuery as external tables. DBT then transforms the data into a structured Snowflake schema within the data warehouse, creating dimension tables for teams, seasons, and competitions. The leagues processed can be adjusted in the `config.yml` file when using an API subscription that supports additional leagues.
 
